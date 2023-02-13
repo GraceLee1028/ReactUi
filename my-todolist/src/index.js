@@ -1,5 +1,8 @@
 import React from "react";
-import ReactDOM  from "react-dom";
+//17之前的api
+// import ReactDOM from "react-dom";
+//18之后新的api
+import {createRoot}  from "react-dom/client";
 class Todo extends React.Component{
   render(){
     return <li>hello,{this.props.text}</li>
@@ -28,8 +31,7 @@ class App extends React.Component{
   }
 }
 //17之前的api
-ReactDOM.render(<App />,document.getElementById('root'))
+// ReactDOM.render(<App />,document.getElementById('root'))
 //18之后新的api
-// const rootEle = document.getElementById('root')
-// const root = ReactDOM.createRoot(rootEle)
-// root.render(<App cal)
+const root = createRoot(document.getElementById('root'))
+root.render(<App />)
