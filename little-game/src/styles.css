@@ -76,9 +76,14 @@ body {
   content: '';
   display: table;
 }
-
+.board{
+  display:grid;
+  grid-template-columns: repeat(5,34px);
+  grid-template-rows: repeat(5,34px);
+}
 .status {
   margin-bottom: 10px;
+  color:#f90;
 }
 .game {
   display: flex;
