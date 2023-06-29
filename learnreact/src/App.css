@@ -30,7 +30,12 @@
 .gallery{
   width:100%;
 }
-
+.profile{
+  display:none;
+}
+.profile.active{
+  display:block;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -38,4 +43,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+form{
+  margin-top:20px;
+}
+.form-item{
+  display:block;
+  margin-top:10px;
 }
