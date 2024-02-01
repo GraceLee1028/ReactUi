@@ -13,10 +13,10 @@ class Login extends React.Component{
     render(){
         return <>
         <List />
-        <label >用户名：<input  ref={this.nameRef}  type="text"/></label>
+        <label >用户名：<input  ref={this.nameRef}  type="text" /></label>
         <label >密码：<input ref={(ref)=>{this.pwdRef=ref}} type="password" /></label>
         <button onClick={this.loginDeal}>登录</button>
-        <p>当前登录信息为:用户名：{this.state.name} 密码：{this.state.pwd}</p>
+        <p>当前登录信息为:<br/>用户名：{this.state.name} 密码：{this.state.pwd}</p>
         </>
     }
     loginDeal=()=>{

@@ -6,6 +6,8 @@ npx create-react-app learn-react
 
 # react 的常用语法
 
+> 减少 ref 的使用
+
 ## ref 字符串形式【不推荐使用,用法同 vue 一样】
 
 ```
