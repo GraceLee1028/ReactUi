@@ -7,17 +7,23 @@ class Login extends React.Component{
             name:'',
             pwd:""
         }
-        console.log('挂载前===========',constructor)
+        console.log('constructor挂载前===========')
+    }
+    componentWillMount(){
+        localStorage.setItem('test','1')
+        console.log('将要挂载时调用=========componentWillMount')
     }
     componentDidMount(){
-        console.log('挂载后=========componentDidMount')
+        console.log('挂载完后调用=========componentDidMount')
     }
     componentWillUnmount(){
+        localStorage.setItem('test','2')
         console.log("卸载或销毁前调用=========componentWillUnmount")
     }
     nameRef=React.createRef()// createRef的用法【最推荐用法】
     pwdRef = null//ref的回调用法
     render(){
+        console.log("render=========")
         return <>
         <List />
         <label >用户名：<input  ref={this.nameRef}  type="text" /></label>
