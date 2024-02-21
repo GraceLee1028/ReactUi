@@ -15,10 +15,10 @@ npx create-react-app learn-react
             componentWillMount(将要挂载时调用，会执行一次或多次)【该钩子函数重命名为 UNSAFE_componentWillMount，不推荐使用，旧的名称在 18 之后不再支持】》
             render(渲染) 》
         -   Commit 阶段【可以使用 DOM】
-            componentDidMount(挂载后调用) 【适合异步请求】》
+            componentDidMount(挂载后调用) 【适合异步请求数据、定时器、开始订阅】》
 
         > 卸载时时执行顺序
-         componentWillUnmount（卸载或销毁前调用） 》
+         componentWillUnmount（卸载或销毁前调用）【关闭定时器、取消订阅】 》
 
     ![Alt text](image-1.png)
 

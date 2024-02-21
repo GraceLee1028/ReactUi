@@ -9,20 +9,23 @@ class App extends React.Component{
       console.log('app======constructor挂载前===========')
   }
   componentWillMount(){
-    localStorage.setItem('app','1')
+    // localStorage.setItem('app','1')
       console.log('app将要挂载时调用=========componentWillMount')
   }
   componentDidMount(){
       console.log('app挂载完后调用=========componentDidMount')
   }
   componentWillUnmount(){
-      localStorage.setItem('app','2')
+      // localStorage.setItem('app','2')
       console.log("app卸载或销毁前调用=========componentWillUnmount")
+  }
+  static getDerivedStateFromProps(){
+    console.log('getDerivedStateFromProps')
   }
   render(){
     console.log("render=========app")
     return <div className="App">
-        {/* <Login /> */}
+        <Login />
         <LoginTwo/>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
