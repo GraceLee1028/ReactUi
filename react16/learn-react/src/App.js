@@ -6,6 +6,7 @@ import LoginTwo from "./views/system/LoginTwo"
 class App extends React.Component{
   constructor(props){
     super(props)
+    this.state = {name:"test"};
       console.log('app======constructor挂载前===========')
   }
   componentWillMount(){
@@ -19,14 +20,17 @@ class App extends React.Component{
       // localStorage.setItem('app','2')
       console.log("app卸载或销毁前调用=========componentWillUnmount")
   }
-  static getDerivedStateFromProps(){
-    console.log('getDerivedStateFromProps')
+  changeName=(event)=>{
+    this.setState({
+      name:event.target.value
+    })
   }
   render(){
     console.log("render=========app")
     return <div className="App">
-        <Login />
+        <Login name={this.state.name} />
         <LoginTwo/>
+        <input  onBlur={this.changeName} type="text" placeholder="你的姓名" />
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
