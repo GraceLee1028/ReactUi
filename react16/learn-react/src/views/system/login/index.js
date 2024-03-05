@@ -1,6 +1,8 @@
 import React from "react";
-import List from './list'
 import axios from "axios"
+import {UserOutlined,EyeInvisibleOutlined,KeyOutlined} from "@ant-design/icons"
+import {Form,Input,Checkbox,Button} from "antd"
+import "./index.scss"
 class Login extends React.Component{
     constructor(props){
         super(props)
@@ -42,18 +44,29 @@ class Login extends React.Component{
     nameRef=React.createRef()// createRef的用法【最推荐用法】
     pwdRef = null//ref的回调用法
     render(){
-        // console.log("render=========login")
-        const userHistory = this.state.history.map(item=>{
-            return <p key={item.name}>用户名：{item.name},密码：{item.pwd}</p>
-        })
         return <>
-        <h1>历史登录信息</h1>
-        {userHistory}
-        <List />
-        <label >用户名：<input  ref={this.nameRef}  type="text" /></label>
-        <label >密码：<input ref={(ref)=>{this.pwdRef=ref}} type="password" /></label>
-        <button onClick={this.loginDeal}>登录</button>
-        <p>当前登录信息为:<br/>用户名：{this.state.name} 密码：{this.state.pwd}</p>
+        <Form>
+            <Form.Item>
+                <Input  prefix={<UserOutlined className='login-pre-icon'/>} placeholder="用户名"/>
+            </Form.Item>
+            <Form.Item>
+                <Input.Password prefix={<KeyOutlined className='login-pre-icon' />} suffix={<EyeInvisibleOutlined />}  placeholder="密码"/>
+            </Form.Item>
+            <Form.Item>
+                <Checkbox>自动登录</Checkbox>
+            </Form.Item>
+            <Button type="primary" block>登录</Button>
+
+            {/* <Form.Item name="username">
+                <Input  prefix={UserOutlined} placeholder="用户名"/>
+            </Form.Item>
+            <Form.Item name="password">
+                <Input.Password prefix={UserOutlined} suffix={EyeInvisibleOutlined}  placeholder="密码"/>
+            </Form.Item>
+            <Form.Item name="autologin">
+                <Checkbox>自动登录</Checkbox>
+            </Form.Item> */}
+        </Form>
         </>
     }
     getUserInfo(){

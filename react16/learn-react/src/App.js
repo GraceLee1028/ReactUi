@@ -1,12 +1,13 @@
 import React from "react";
-import logo from './logo.svg';
-import './App.css';
-import Login from "./views/system/login"
-import LoginTwo from "./views/system/LoginTwo"
+import varStyles from '@/assets/scss/var.module.scss';
+import Login from "./views/layout"
+// 自定义主题
+import {ConfigProvider} from "antd"
 class App extends React.Component{
   constructor(props){
     super(props)
     this.state = {name:"test"};
+    console.log(varStyles,'varStyles========')
       console.log('app======constructor挂载前===========')
   }
   componentWillMount(){
@@ -26,26 +27,10 @@ class App extends React.Component{
     })
   }
   render(){
-    console.log("render=========app")
-    return <div className="App">
-        <Login name={this.state.name} />
-        <LoginTwo/>
-        <input  onBlur={this.changeName} type="text" placeholder="你的姓名" />
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-    </div>
+    console.log("render=========app");
+    return <ConfigProvider theme={{token:{colorPrimary:'#2aa3ff'}}}>
+        <Login className={varStyles.primary}></Login>
+    </ConfigProvider>
   }
   
 }

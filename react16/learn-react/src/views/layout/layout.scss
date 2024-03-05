@@ -1,0 +1,24 @@
+
+.lf-navbar{
+    --navbar-height:50px;
+    --navbar-color:#fff;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height:var(--navbar-height);
+    background-color: var(--primary-color);
+    background: linear-gradient(45deg,var(--primary-color-light),var(--primary-color));
+    color:var(--navbar-color);
+    font-size:1.4em;
+    padding:0 var(--padding);
+    &__brand{
+        
+    }
+    &-title{
+
+    }
+
+    &__todo{
+
+    }
+}

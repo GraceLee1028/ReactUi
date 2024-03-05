@@ -1,0 +1,16 @@
+.ant-form{
+    width:50vw;
+    min-width: 300px;
+    max-width: 500px;
+    position:relative;
+    top:50vh;
+    left:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
+.login-pre-icon{
+    color:var(--gray-color-light);
+}
