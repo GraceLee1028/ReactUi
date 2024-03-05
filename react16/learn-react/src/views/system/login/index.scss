@@ -1,15 +1,49 @@
+body{
+    background:#add4f4 url("~@/assets/images/status/10006.png") no-repeat;
+    background-position: -45vh 12vh;
+    background-size: 150%;
+}
 .ant-form{
-    width:50vw;
-    min-width: 300px;
-    max-width: 500px;
+    width:1000px;
     position:relative;
     top:50vh;
     left:50%;
     transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-    -moz-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-    -o-transform: translate(-50%,-50%);
+}
+.login-container{
+    box-shadow: 5px 5px 0px 0px #0a59de;
+    background: linear-gradient(#b9dcf7, #a9e3fc, #add4f4);
+    position: relative;
+    padding-left:700px;
+    overflow: hidden;
+    padding-top:10em;
+    padding-right:2em;
+    padding-bottom:10em;
+    border-radius: 4em;
+    -webkit-border-radius: 4em;
+    -moz-border-radius: 4em;
+    -ms-border-radius: 4em;
+    -o-border-radius: 4em;
+    &:before,&:after{
+        content:"";
+        display:inline-block;
+        width:65%;
+        height:100%;
+        position: absolute;
+        left:0;
+        top:0em;
+        bottom:0;
+    }
+    &:before{
+        background:url("~@/assets/images/status/10005.png") no-repeat;
+        background-size: 100% 110%;
+        background-position: -4em -2em;
+        z-index:1;
+    }
+    &:after{
+        z-index:10;
+        background: linear-gradient(100deg,rgb(166 221 250 / 30%), transparent);
+    }
 }
 .login-pre-icon{
     color:var(--gray-color-light);

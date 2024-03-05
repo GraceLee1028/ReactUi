@@ -45,7 +45,7 @@ class Login extends React.Component{
     pwdRef = null//ref的回调用法
     render(){
         return <>
-        <Form>
+        <Form className="login-container">
             <Form.Item>
                 <Input  prefix={<UserOutlined className='login-pre-icon'/>} placeholder="用户名"/>
             </Form.Item>
@@ -56,7 +56,6 @@ class Login extends React.Component{
                 <Checkbox>自动登录</Checkbox>
             </Form.Item>
             <Button type="primary" block>登录</Button>
-
             {/* <Form.Item name="username">
                 <Input  prefix={UserOutlined} placeholder="用户名"/>
             </Form.Item>
