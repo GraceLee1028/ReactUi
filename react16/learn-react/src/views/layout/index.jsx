@@ -1,13 +1,25 @@
 import React, {Component} from 'react';
+import {Outlet} from "react-router-dom";
 import "./layout.scss"
-import Navbar from './navbar';
-class Layout extends Component {
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
+import {Layout} from 'antd';
+const {Header, Sider, Content} = Layout;
+class LayoutMain extends Component {
     render() {
         return (
-            <main className="lf-layout-container">
-                <Navbar />
-            </main>
+            <Layout theme="light" className="lf-layout-container light">
+                <Header><Navbar /></Header>
+                <Layout>
+                    <Sider><Sidebar></Sidebar></Sider>
+                    <Content>
+                        <div id="layoutContent">
+                            <Outlet />
+                        </div>
+                    </Content>
+                </Layout>
+            </Layout>
         );
     }
 }
-export default Layout;
+export default LayoutMain;

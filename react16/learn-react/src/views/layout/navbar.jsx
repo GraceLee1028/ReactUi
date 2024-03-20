@@ -22,7 +22,7 @@ class Navbar extends Component {
                     >
                         <Space>
                             <Avatar icon={<UserOutlined />} />
-                            <DownOutlined />
+                            {/* <DownOutlined /> */}
                         </Space>
                     </Dropdown>
                 </div>
