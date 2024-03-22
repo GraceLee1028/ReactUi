@@ -1,5 +1,9 @@
 import {Component} from 'react';
+import PropTypes from "prop-types"
 class TodoHeader extends Component {
+    static propTypes = {
+        onAdd: PropTypes.func.isRequired
+    }
     state = {
         currentValue: ""
     }
