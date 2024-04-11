@@ -58,6 +58,14 @@ module.exports = {
         // 允许跨域
         'Access-Control-Allow-Origin': '*',
       },
+      //代理
+      proxy:{
+        "/proxy":{
+          target:"http://192.168.29.60:18081/manage",
+          chageOrigin:true,
+          path
+        }
+      }
     },
     babel: {
       plugins: [
