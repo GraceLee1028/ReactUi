@@ -11,6 +11,9 @@ class InputContainer extends Component {
     if (prevProps.entryNumber !== this.props.entryNumber) {
       this.setState({ entryNumber: this.props.entryNumber })
     }
+    if (prevProps.value !== this.props.value) {
+      this.setState({ entryDropdownValue: this.props.value })
+    }
   }
   render() {
     return (
