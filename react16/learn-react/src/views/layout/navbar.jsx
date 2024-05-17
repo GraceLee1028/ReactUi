@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, DownOutlined} from "@ant-design/icons";
+import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from "@ant-design/icons";
 import {Dropdown, Avatar, Space} from 'antd';
 class Navbar extends Component {
     state = {
         menuItems: [
-            {label: "字体大小", key: 'exit'},
             {label: "字体大小", key: 'exit'},
             {label: "退出", key: 'exit'}
         ]

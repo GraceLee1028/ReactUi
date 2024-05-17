@@ -1,12 +1,15 @@
-// $primary-color:"#00BCD4";
-// .primary{
-//     color:$primary-color;
-// }
-:root{
-    --primary-color:#1997f8;
-    --primary-color-light:#2493f2;
-    --gray-color-light:#a2a4a8;
-    --color-one:rgb(52 88 240 / 38%);
-    // 布局
-    --padding:0.6em;
+:root {
+  --primary-color: #575be3;
+  --primary-color-two: #4044cf;
+  --color-one: #2a3566;
+  --color-light: #7787a3;
+  --color-two: #4e53f6;
+
+  --bg-color: #f0f4fd;
+  --bg-color-two: #f4f5f8;
+  --bg-primary-color: #e7e8ff;
+
+  --shadow: 0 0 10px 0 rgba(222, 222, 222, 0.3);
+  // 布局
+  --padding: 0.6em;
 }

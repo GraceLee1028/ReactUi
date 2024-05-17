@@ -1,21 +1,23 @@
 import React, {Component} from 'react';
 import {BookOutlined} from "@ant-design/icons";
 import {Menu} from 'antd';
+// import {useLoaderData} from "react-router-dom"
+// const {contacts} =  useLoaderData();
+
 class Sidebar extends Component {
     state = {
         menuItems: [
             {
                 key: "001",
                 icon: <BookOutlined />,
-                label: "待办事项"
+                label: "首页"
             },
             {
-                type: 'divider',
-            },
+                key: "002",
+                icon: <BookOutlined />,
+                label: "用户中心"
+            }
         ]
-    }
-    onClick = (e) => {
-        console.log('click', e)
     }
     render() {
         return (
@@ -27,7 +29,6 @@ class Sidebar extends Component {
                 mode="inline"
                 items={this.state.menuItems}
             />
-
         );
     }
 }

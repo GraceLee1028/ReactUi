@@ -12,7 +12,7 @@ class Home extends Component {
         currentValue: ""
     }
     render() {
-        return <main className="lf-container">
+        return <main className="lf-container white">
             <TodoHeader onAdd={this.addTodoItem}></TodoHeader>
             <TodoList list={this.state.todoList} onChangeTodo={this.changeTodo} onDeleteTodo={this.deleteTodoItem}></TodoList>
             <TodoFooter todos={this.state.todoList} onClearFinish={this.onClearFinish} checkAll={this.checkAll}></TodoFooter>

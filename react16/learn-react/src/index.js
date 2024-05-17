@@ -1,20 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
-import { RouterProvider } from 'react-router-dom';
-import router from "./router"
-import './index.css';
-import '@/assets/scss/index.scss';
-import request from "@/utils/request"
-const root = ReactDOM.createRoot(document.getElementById('root'));
-React.Component.prototype.$request = request;
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import reportWebVitals from './reportWebVitals'
+import { RouterProvider } from 'react-router-dom'
+import router from './router'
+import './index.scss'
+import '@/assets/scss/index.scss'
+import request from '@/utils/request'
+const root = ReactDOM.createRoot(document.getElementById('root'))
+React.Component.prototype.$request = request
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
-);
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals()
