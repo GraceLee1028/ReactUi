@@ -4,7 +4,14 @@ class User extends Component {
   state = {
     //declare variable
     isError: false,
-    targetId: ''
+    targetId: '',
+    CaloriesList: [
+      { id: 'breakfast', label: 'Breakfast' },
+      { id: 'lunch', label: 'Lunch' },
+      { id: 'dinner', label: 'Dinner' },
+      { id: 'snacks', label: 'Snacks' },
+      { id: 'exercise', label: 'Exercise' }
+    ]
   }
   render() {
     return (
@@ -13,26 +20,9 @@ class User extends Component {
         <form id="calorie-counter">
           <label htmlFor="budget">Budget</label>
           <input type="number" min="0" placeholder="Daily calorie budget" id="budget" required />
+
           <fieldset id="breakfast">
             <legend>Breakfast</legend>
-            <div className="input-container">
-              <input type="text" placeholder="Name" id="" />
-            </div>
-          </fieldset>
-          <fieldset id="lunch">
-            <legend>Lunch</legend>
-            <div className="input-container"></div>
-          </fieldset>
-          <fieldset id="dinner">
-            <legend>Dinner</legend>
-            <div className="input-container"></div>
-          </fieldset>
-          <fieldset id="snacks">
-            <legend>Snacks</legend>
-            <div className="input-container"></div>
-          </fieldset>
-          <fieldset id="exercise">
-            <legend>Exercise</legend>
             <div className="input-container"></div>
           </fieldset>
           <div className="controls">
