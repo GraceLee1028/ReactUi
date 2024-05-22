@@ -85,3 +85,10 @@ select {
 .deficit {
   color: var(--light-green);
 }
+label {
+  margin-right: 10px;
+}
+button + button,
+button:not(:first-child) {
+  margin-left: 10px;
+}

@@ -1,31 +1,95 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 class InputContainer extends Component {
+  static propTypes = {
+    number: PropTypes.number
+  }
   constructor(props) {
     super(props)
     this.state = {
-      entryNumber: props.number,
-      entryDropdownValue: props.value
+      addList: [],
+      entryDropdownValue: props.item.id,
+      entryDropdownName: props.item.label
     }
   }
-  componentDidUpdate(prevProps) {
-    if (prevProps.entryNumber !== this.props.entryNumber) {
-      this.setState({ entryNumber: this.props.entryNumber })
-    }
-    if (prevProps.value !== this.props.value) {
-      this.setState({ entryDropdownValue: this.props.value })
+  componentDidUpdate(prevProps, prevState) {
+    // console.log(this.props.number, '======', prevProps.number)
+    if (this.props.number !== prevProps.number) {
+      this.addItem()
     }
   }
   render() {
+    const inputItems = this.state.addList.map((item, index) => {
+      return (
+        <React.Fragment key={this.state.entryDropdownValue + item.number}>
+          <label htmlFor={`${this.state.entryDropdownValue}-${item.number}-name`}>Entry {item.number} Name</label>
+          <input
+            value={item.name}
+            onChange={event => this.changeItem(event.target.value, index, 'name')}
+            type="text"
+            id={`${this.state.entryDropdownValue}-${item.number}-name`}
+            placeholder="Name"
+          />
+          <label htmlFor={`${this.state.entryDropdownValue}-${item.number}-calories`}>Entry {item.number} Calories</label>
+          <input
+            type="number"
+            min="0"
+            value={item.value}
+            onChange={event => this.changeItem(event.target.value, index, 'value')}
+            id={`${this.state.entryDropdownValue}-${item.number}-calories`}
+            placeholder="Calories"
+          />
+        </React.Fragment>
+      )
+    })
     return (
-      <React.Fragment>
-        <label htmlFor={`${this.state.entryDropdownValue}-${this.state.entryNumber}-name`}>Entry {this.state.entryNumber} Name</label>
-        <input type="text" id={`${this.state.entryDropdownValue}-${this.state.entryNumber}-name`} placeholder="Name" />
-        <label htmlFor={`${this.state.entryDropdownValue}-${this.state.entryNumber}-calories`}>
-          Entry {this.state.entryNumber} Calories
-        </label>
-        <input type="number" min="0" id={`${this.state.entryDropdownValue}-${this.state.entryNumber}-calories`} placeholder="Calories" />
-      </React.Fragment>
+      <fieldset id={this.state.entryDropdownValue}>
+        <legend>{this.state.entryDropdownName}</legend>
+        <div className="input-container">
+          {inputItems}
+          {/* {this.state.addList.map((item, index) => {
+            return (
+              <React.Fragment key={this.state.entryDropdownValue + item.number}>
+                <label htmlFor={`${this.state.entryDropdownValue}-${item.number}-name`}>Entry {item.number} Name</label>
+                <input
+                  value={item.name}
+                  onChange={event => this.changeItem(event.target.value, index, 'name')}
+                  type="text"
+                  id={`${this.state.entryDropdownValue}-${item.number}-name`}
+                  placeholder="Name"
+                />
+                <label htmlFor={`${this.state.entryDropdownValue}-${item.number}-calories`}>Entry {item.number} Calories</label>
+                <input
+                  type="number"
+                  min="0"
+                  value={item.value}
+                  onChange={event => this.changeItem(event.target.value, index, 'value')}
+                  id={`${this.state.entryDropdownValue}-${item.number}-calories`}
+                  placeholder="Calories"
+                />
+              </React.Fragment>
+            )
+          })} */}
+        </div>
+      </fieldset>
     )
+  }
+  //添加
+  addItem = () => {
+    console.log('新增')
+    const length = this.state.addList.length
+    this.setState(prevState => {
+      console.log(prevState.addList, '========数据')
+      return { addList: [...prevState.addList, { number: length + 1, value: '', name: '' }] }
+    })
+  }
+  //更新
+  changeItem = (value, index, key) => {
+    this.setState(prevState => {
+      const list = [...prevState.addList]
+      list.splice(index, 1, { ...list[index], name: value })
+      return { addList: list }
+    })
   }
 }
 export default InputContainer
