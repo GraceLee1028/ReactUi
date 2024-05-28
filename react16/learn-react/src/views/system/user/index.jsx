@@ -12,7 +12,17 @@ class User extends Component {
       { id: 'dinner', label: 'Dinner', number: 0 },
       { id: 'snacks', label: 'Snacks', number: 0 },
       { id: 'exercise', label: 'Exercise', number: 0 }
-    ]
+    ],
+    form: {
+      budgetCalories: ''
+    },
+    result: {
+      remainingCalories: '',
+      budgetCalories: '',
+      consumedCalories: '',
+      exerciseCalories: ''
+    },
+    showResult: false
   }
   render() {
     return (
@@ -20,7 +30,15 @@ class User extends Component {
         用户详情页面
         <form id="calorie-counter">
           <label htmlFor="budget">Budget</label>
-          <input type="number" min="0" placeholder="Daily calorie budget" id="budget" required />
+          <input
+            type="number"
+            value={this.state.form.budgetCalories}
+            onChange={event => this.changeForm(event, 'budgetCalories')}
+            min="0"
+            placeholder="Daily calorie budget"
+            id="budget"
+            required
+          />
           {this.state.CaloriesList.map(item => {
             return <InputContainer key={item.id} number={item.number} item={item} />
           })}
@@ -42,7 +60,7 @@ class User extends Component {
             </span>
           </div>
           <div>
-            <button type="submit" onClick="calculateCalories">
+            <button type="submit" onClick={this.calculateCalories}>
               Calculate Remaining Calories
             </button>
             <button type="button" id="clear" onClick={this.cleanInputString}>
@@ -50,9 +68,20 @@ class User extends Component {
             </button>
           </div>
         </form>
-        <div className="output hide" id="output"></div>
+        <div className={`output ${this.state.showResult ? '' : 'hide'}`} id="output">
+          <span class="{this.state.form.surplusOrDeficit.toLowerCase()}">
+            {Math.abs(this.state.result.remainingCalories)} Calorie {this.getSurplusOrDeficit()}
+          </span>
+          <hr />
+          <p>{this.state.result.budgetCalories} Calories Budgeted</p>
+          <p>{this.state.result.consumedCalories} Calories Consumed</p>
+          <p>{this.state.result.exerciseCalories} Calories Burned</p>
+        </div>
       </main>
     )
+  }
+  getSurplusOrDeficit() {
+    return this.state.remainingCalories < 0 ? 'Surplus' : 'Deficit'
   }
   changeType = event => {
     const value = event.target.value
@@ -94,13 +123,48 @@ class User extends Component {
         number: preItem.number + 1
       }
       list.splice(index, 1, newItem)
-      console.log('newItem====', newItem, list)
+      // console.log('newItem====', newItem, list);
       return { CaloriesList: list }
     })
+  }
+  changeData(data) {
+    for (let key of data) {
+      // this.setState()
+    }
   }
   //calc calories
   calculateCalories = e => {
     e.preventDefault()
+
+    this.setState({
+      showResult: true,
+      result: {
+        remainingCalories: '',
+        budgetCalories: '',
+        consumedCalories: '',
+        exerciseCalories: ''
+      }
+    })
+  }
+  clearForm() {
+    this.setState(prevState => {
+      const newList = prevState.CaloriesList.map(cItem => {
+        return { ...cItem, number: 0 }
+      })
+      return { CaloriesList: newList }
+    })
+    this.setState({
+      showResult: false,
+      form: { budgetCalories: '' },
+      result: { remainingCalories: '', budgetCalories: '', consumedCalories: '', exerciseCalories: '' }
+    })
+  }
+  changeForm(event, key) {
+    const value = event.target.value
+    this.setState(prevState => {
+      const form = prevState.form
+      return { form: { ...form, [key]: value } }
+    })
   }
 }
 export default User
