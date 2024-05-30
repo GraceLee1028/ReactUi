@@ -1,17 +1,27 @@
-import { Component } from 'react'
+import { Component, createRef } from 'react'
 import './index.scss'
 import InputContainer from './inputContainer'
 class User extends Component {
+  // cataItemRef = createRef()
+  constructor(props) {
+    super(props)
+    this.childRefs = []
+  }
+  addRef = ref => {
+    if (ref && !this.childRefs.includes(ref)) {
+      this.childRefs.push(ref)
+    }
+  }
   state = {
     //declare variable
     isError: false,
     targetId: 'breakfast',
     CaloriesList: [
-      { id: 'breakfast', label: 'Breakfast', number: 0 },
-      { id: 'lunch', label: 'Lunch', number: 0 },
-      { id: 'dinner', label: 'Dinner', number: 0 },
-      { id: 'snacks', label: 'Snacks', number: 0 },
-      { id: 'exercise', label: 'Exercise', number: 0 }
+      { id: 'breakfast', label: 'Breakfast', number: 0, calories: 0 },
+      { id: 'lunch', label: 'Lunch', number: 0, calories: 0 },
+      { id: 'dinner', label: 'Dinner', number: 0, calories: 0 },
+      { id: 'snacks', label: 'Snacks', number: 0, calories: 0 },
+      { id: 'exercise', label: 'Exercise', number: 0, calories: 0 }
     ],
     form: {
       budgetCalories: ''
@@ -32,15 +42,15 @@ class User extends Component {
           <label htmlFor="budget">Budget</label>
           <input
             type="number"
-            value={this.state.form.budgetCalories}
-            onChange={event => this.changeForm(event, 'budgetCalories')}
+            value={this.state.result.budgetCalories}
+            onChange={event => this.changeResult(event, 'budgetCalories')}
             min="0"
             placeholder="Daily calorie budget"
             id="budget"
             required
           />
           {this.state.CaloriesList.map(item => {
-            return <InputContainer key={item.id} number={item.number} item={item} />
+            return <InputContainer ref={this.addRef} key={item.id} number={item.number} item={item} onError={this.changeErrorFlag} />
           })}
           <div className="controls">
             <span>
@@ -63,55 +73,38 @@ class User extends Component {
             <button type="submit" onClick={this.calculateCalories}>
               Calculate Remaining Calories
             </button>
-            <button type="button" id="clear" onClick={this.cleanInputString}>
+            <button type="button" id="clear" onClick={this.clearForm}>
               Clear
             </button>
           </div>
         </form>
         <div className={`output ${this.state.showResult ? '' : 'hide'}`} id="output">
-          <span class="{this.state.form.surplusOrDeficit.toLowerCase()}">
+          <span className="{this.state.form.surplusOrDeficit.toLowerCase()}">
             {Math.abs(this.state.result.remainingCalories)} Calorie {this.getSurplusOrDeficit()}
           </span>
           <hr />
-          <p>{this.state.result.budgetCalories} Calories Budgeted</p>
-          <p>{this.state.result.consumedCalories} Calories Consumed</p>
-          <p>{this.state.result.exerciseCalories} Calories Burned</p>
+          <p>{Math.abs(this.state.result.budgetCalories)} Calories Budgeted</p>
+          <p>{Math.abs(this.state.result.consumedCalories)} Calories Consumed</p>
+          <p>{Math.abs(this.state.result.exerciseCalories)} Calories Burned</p>
         </div>
       </main>
     )
   }
   getSurplusOrDeficit() {
-    return this.state.remainingCalories < 0 ? 'Surplus' : 'Deficit'
+    return this.state.result.remainingCalories > 0 ? 'Surplus' : 'Deficit'
   }
   changeType = event => {
     const value = event.target.value
     console.log(this.state, value)
     this.setState({ targetId: value })
   }
-  cleanInputString = str => {
-    const regex = /[+-\s]/g
-    console.log('original string: ', str)
-    return str.replace(regex, '')
+  //错误标识
+  changeErrorFlag = (flag = false) => {
+    this.setState({
+      isError: flag
+    })
   }
-  isInvalidInput = str => {
-    const regex = /\d+e\d+/i
-    const result = str.match(regex)
-    return result
-  }
-  getCaloriesFromInputs = list => {
-    let calories = 0
-    for (const item of list) {
-      const currVal = this.cleanInputString(item.value)
-      const invalidInputMatch = this.isInvalidInput(currVal)
-      if (invalidInputMatch) {
-        alert(`Invalid Input: ${invalidInputMatch[0]}`)
-        this.setState({ isError: true })
-        return null
-      }
-      calories += Number(currVal)
-    }
-    return calories
-  }
+
   //添加某项
   addEntry = () => {
     const index = this.state.CaloriesList.findIndex(item => item.id === this.state.targetId)
@@ -123,30 +116,48 @@ class User extends Component {
         number: preItem.number + 1
       }
       list.splice(index, 1, newItem)
-      // console.log('newItem====', newItem, list);
       return { CaloriesList: list }
     })
   }
-  changeData(data) {
+  changeData = data => {
     for (let key of data) {
       // this.setState()
     }
   }
-  //calc calories
+  //计算
   calculateCalories = e => {
     e.preventDefault()
-
+    console.log(this.childRefs)
+    let remainingCalories = 0,
+      budgetCalories = this.state.result.budgetCalories,
+      consumedCalories = 0,
+      exerciseCalories = 0
+    this.childRefs.map((ref, index) => {
+      const calories = ref.getData()
+      console.log(calories, '======')
+      if (index === this.childRefs.length - 1) {
+        exerciseCalories = calories
+      } else {
+        consumedCalories += calories
+      }
+    })
+    if (this.state.isError) {
+      return
+    }
+    remainingCalories = budgetCalories - consumedCalories + exerciseCalories
+    console.log(remainingCalories)
     this.setState({
       showResult: true,
       result: {
-        remainingCalories: '',
-        budgetCalories: '',
-        consumedCalories: '',
-        exerciseCalories: ''
+        remainingCalories: remainingCalories,
+        budgetCalories: budgetCalories,
+        consumedCalories: consumedCalories,
+        exerciseCalories: exerciseCalories
       }
     })
   }
-  clearForm() {
+  //清空
+  clearForm = () => {
     this.setState(prevState => {
       const newList = prevState.CaloriesList.map(cItem => {
         return { ...cItem, number: 0 }
@@ -159,11 +170,12 @@ class User extends Component {
       result: { remainingCalories: '', budgetCalories: '', consumedCalories: '', exerciseCalories: '' }
     })
   }
-  changeForm(event, key) {
+  //预算
+  changeResult(event, key) {
     const value = event.target.value
     this.setState(prevState => {
-      const form = prevState.form
-      return { form: { ...form, [key]: value } }
+      const result = prevState.result
+      return { result: { ...result, [key]: value } }
     })
   }
 }
