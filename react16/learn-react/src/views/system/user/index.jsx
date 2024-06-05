@@ -1,5 +1,6 @@
 import { Component, createRef } from 'react'
 import './index.scss'
+import userImg from '@/assets/images/status/10008.jpg'
 import InputContainer from './inputContainer'
 class User extends Component {
   // cataItemRef = createRef()
@@ -38,6 +39,7 @@ class User extends Component {
     return (
       <main className="lf-container white">
         用户详情页面
+        <img class="user-clip one" src={userImg} alt="user" />
         <form id="calorie-counter">
           <label htmlFor="budget">Budget</label>
           <input

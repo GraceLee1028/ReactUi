@@ -92,3 +92,67 @@ button + button,
 button:not(:first-child) {
   margin-left: 10px;
 }
+button {
+  clip-path: inset(0px 0px 0px 0px round 10px 4px);
+}
+.user-clip {
+  width: 200px;
+  height: 200px;
+  clip-path: circle(100px at 100px 100px);
+  animation: move-circle 5s ease;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  border: 1px solid #67a9ff;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+@keyframes move-circle {
+  0% {
+    clip-path: circle(10px at 100px 100px);
+  }
+  10% {
+    clip-path: circle(20px at 10px 100px);
+  }
+  20% {
+    clip-path: circle(30px at 20px 90px);
+  }
+  30% {
+    clip-path: circle(40px at 30px 90px);
+  }
+
+  40% {
+    clip-path: circle(50px at 40px 90px);
+  }
+  50% {
+    clip-path: circle(60px at 40px 90px);
+  }
+
+  60% {
+    clip-path: circle(70px at 50px 90px);
+  }
+
+  70% {
+    clip-path: circle(100px at 60px 90px);
+  }
+  80% {
+    clip-path: circle(90px at 70px 90px);
+  }
+  90% {
+    clip-path: circle(80px at 80px 90px);
+  }
+  100% {
+    clip-path: circle(70px at 100px 90px);
+  }
+}
