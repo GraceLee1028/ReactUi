@@ -1,4 +1,4 @@
-import { Component, createRef } from 'react'
+import { Component } from 'react'
 import './index.scss'
 import userImg from '@/assets/images/status/10008.jpg'
 import InputContainer from './inputContainer'
@@ -39,7 +39,7 @@ class User extends Component {
     return (
       <main className="lf-container white">
         用户详情页面
-        <img class="user-clip one" src={userImg} alt="user" />
+        <img className="user-clip one" src={userImg} alt="user" />
         <form id="calorie-counter">
           <label htmlFor="budget">Budget</label>
           <input
@@ -120,11 +120,6 @@ class User extends Component {
       list.splice(index, 1, newItem)
       return { CaloriesList: list }
     })
-  }
-  changeData = data => {
-    for (let key of data) {
-      // this.setState()
-    }
   }
   //计算
   calculateCalories = e => {

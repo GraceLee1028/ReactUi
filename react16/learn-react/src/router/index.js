@@ -1,9 +1,10 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Login from '@/views/system/login/index.js';
-import LayoutMain from '@/views/layout/index.jsx';
-import Home from '@/views/system/home/index.jsx';
-import User from '@/views/system/user/index.jsx';
-import Error from '@/views/layout/error';
+import { createBrowserRouter } from 'react-router-dom'
+import Login from '@/views/system/login/index.js'
+import LayoutMain from '@/views/layout/index.jsx'
+import Home from '@/views/system/home/index.jsx'
+import User from '@/views/system/user/index.jsx'
+import MatchTwo from '@/views/system/match/index.jsx'
+import Error from '@/views/layout/error'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -19,6 +20,11 @@ const router = createBrowserRouter([
         path: 'user/:userId',
         element: <User />,
         errorElement: <Error />
+      },
+      {
+        path: 'match',
+        element: <MatchTwo />,
+        errorElement: <Error />
       }
     ]
   },
@@ -27,5 +33,5 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <Error />
   }
-]);
-export default router;
+])
+export default router
