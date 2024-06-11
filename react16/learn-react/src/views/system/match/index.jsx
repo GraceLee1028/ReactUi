@@ -1,5 +1,5 @@
 import { Component } from 'react'
-
+import './index.scss'
 class MatchTwo extends Component {
   constructor(props) {
     super(props)
@@ -9,7 +9,8 @@ class MatchTwo extends Component {
       rest: 20000,
       aim: '',
       initVal: 0,
-      aimCount: 0
+      aimCount: 0,
+      aimCountTrue: 0
     },
     trueResult: [], //实际结果
     result: [], //结果
@@ -57,15 +58,19 @@ class MatchTwo extends Component {
               <th>您的点数</th>
               <th>对家的点数</th>
               <th>结果</th>
+              <th>金额</th>
+              <th>剩余余额</th>
             </tr>
           </thead>
           <tbody>
-            {this.state.result.map(item => {
+            {this.state.result.map((item, index) => {
               return (
-                <tr>
-                  <td>{item.falseRandom}</td>
-                  <td>{item.falseOther}</td>
+                <tr key={index}>
+                  <td>{item.player}</td>
+                  <td>{item.other}</td>
                   <td>{item.result}</td>
+                  <td>{item.money}</td>
+                  <td>{item.rest}</td>
                 </tr>
               )
             })}
@@ -78,15 +83,19 @@ class MatchTwo extends Component {
               <th>您的点数</th>
               <th>对家的点数</th>
               <th>结果</th>
+              <th>金额</th>
+              <th>剩余余额</th>
             </tr>
           </thead>
           <tbody>
-            {this.state.trueResult.map(item => {
+            {this.state.trueResult.map((item, index) => {
               return (
-                <tr>
-                  <td>{item.falseRandom}</td>
-                  <td>{item.falseOther}</td>
+                <tr key={index}>
+                  <td>{item.player}</td>
+                  <td>{item.other}</td>
                   <td>{item.result}</td>
+                  <td>{item.money}</td>
+                  <td>{item.rest}</td>
                 </tr>
               )
             })}
@@ -111,49 +120,78 @@ class MatchTwo extends Component {
       return
     }
     this.setState(prevState => {
-      const aimCount = prevState.form.initVal + prevState.form.aimCount
-      const rest = prevState.form.rest - prevState.form.initVal
+      const aimCount = Number(prevState.form.initVal) + prevState.form.aimCount
+      const aimCountTrue = Number(prevState.form.initVal) + prevState.form.aimCountTrue
+      const rest = Number(prevState.form.rest) - prevState.form.initVal
       return {
-        form: { ...prevState.form, aimCount: aimCount, rest: rest }
+        form: { ...prevState.form, aimCount: aimCount, aimCountTrue: aimCountTrue, rest: rest }
       }
     })
   }
   //calc the rest
-  changeAim = () => {
-    const money = this.state.form.aim
-    const aimCount = (this.state.form.aimCount - money).toFixed(2)
-    this.setState(prevState => {
-      return {
-        form: { ...prevState.form, aimCount: aimCount },
-        args: { otherPlayerMoney: aimCount, playerMoney: aimCount }
-      }
-    })
-  }
+  // changeAim = () => {
+  //   const money = this.state.form.aim
+  //   const aimCount = (this.state.form.aimCount - money).toFixed(2)
+  //   this.setState(prevState => {
+  //     return {
+  //       form: { ...prevState.form, aimCount: aimCount },
+  //       args: { otherPlayerMoney: aimCount, playerMoney: aimCount }
+  //     }
+  //   })
+  // }
   //start game
   start = () => {
     if (this.state.form.aim < 50) {
       alert('下注最小50起步，请您重新下注')
       return
     }
+    const aimCount = this.state.form.aimCount
+    const aimCountTrue = this.state.form.aimCountTrue //真实余额
+    if (Number(this.state.form.aim) > aimCount) {
+      alert('充值余额不够，请您先充值')
+      return
+    }
     const max = 6
-    const random = Math.random() * (max + 1)
-    const other = Math.random() * (max + 1)
-    let falseRandom = random,
+    let player = Math.floor(Math.random() * max + 1) //player
+    let other = Math.floor(Math.random() * max + 1)
+    let falsePlayer = player,
       falseOther = other
-    if (random >= other) {
-      if (random === 6) {
+    if (player > other) {
+      //输了做特殊处理
+      if (player === 6) {
+        falsePlayer = Math.floor(Math.random() * max + 1)
         falseOther = 6
       } else {
-        falseRandom = random + Math.floor(Math.random() * (random - other))
+        falseOther = player + Math.floor(Math.random() * (max - other))
       }
     }
-    const falseResult = falseOther < falseRandom ? '赢' : falseOther === falseRandom ? '平' : '输'
-    const trueResult = falseOther < falseRandom ? '赢' : falseOther === falseRandom ? '平' : '输'
+    const falseResult = falseOther < falsePlayer ? '赢' : falseOther === falsePlayer ? '平' : '输'
+    const trueResult = other < player ? '赢' : other === player ? '平' : '输'
+    // const rest = falseResult === '输' ? aimCount - this.state.form.aim : aimCount
+    const falseMoney = falseResult === '输' ? `-${this.state.form.aim}` : falseResult === '赢' ? `+${this.state.form.aim}` : `0`
+    const falseResultMoney =
+      falseResult === '输'
+        ? `${Number(aimCount) - this.state.form.aim}`
+        : falseResult === '赢'
+        ? `${Number(aimCount) + this.state.form.aim}`
+        : aimCount
+    const trueMoney = trueResult === '输' ? `-${this.state.form.aim}` : trueResult === '赢' ? `+${this.state.form.aim}` : `0`
+    const trueResultMoney =
+      trueResult === '输'
+        ? `${Number(aimCountTrue) - this.state.form.aim}`
+        : trueResult === '赢'
+        ? `${Number(aimCountTrue) + Number(this.state.form.aim)}`
+        : aimCountTrue
 
     this.setState(prevState => {
       return {
-        result: [...prevState.result, { player: falseRandom, other: falseOther, result: falseResult }],
-        trueResult: [...prevState.trueResult, { player: random, other: other, result: trueResult }]
+        form: { ...prevState.form, aimCount: falseResultMoney, aimCountTrue: trueResultMoney },
+        args: { otherPlayerMoney: this.state.form.aim, playerMoney: this.state.form.aim },
+        result: [
+          ...prevState.result,
+          { player: falsePlayer, other: falseOther, result: falseResult, money: falseMoney, rest: falseResultMoney }
+        ],
+        trueResult: [...prevState.trueResult, { player: player, other: other, result: trueResult, money: trueMoney, rest: trueResultMoney }]
       }
     })
   }
