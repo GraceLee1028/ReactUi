@@ -4,6 +4,8 @@ import LayoutMain from '@/views/layout/index.jsx'
 import Home from '@/views/system/home/index.jsx'
 import User from '@/views/system/user/index.jsx'
 import MatchTwo from '@/views/system/match/index.jsx'
+import Button from '@/views/system/button/index.jsx'
+import Icon from '@/views/system/icon/index.jsx'
 import Error from '@/views/layout/error'
 const router = createBrowserRouter([
   {
@@ -24,6 +26,16 @@ const router = createBrowserRouter([
       {
         path: 'match',
         element: <MatchTwo />,
+        errorElement: <Error />
+      },
+      {
+        path: 'button',
+        element: <Button />,
+        errorElement: <Error />
+      },
+      {
+        path: 'icon',
+        element: <Icon />,
         errorElement: <Error />
       }
     ]

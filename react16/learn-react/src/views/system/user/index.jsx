@@ -37,7 +37,7 @@ class User extends Component {
   }
   render() {
     return (
-      <main className="lf-container white">
+      <main className={`lf-container white user`}>
         用户详情页面
         <img className="user-clip one" src={userImg} alt="user" />
         <form id="calorie-counter">

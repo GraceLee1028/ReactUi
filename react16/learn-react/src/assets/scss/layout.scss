@@ -24,3 +24,30 @@ body {
     box-shadow: var(--shadow);
   }
 }
+
+.flex {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  & + & {
+    margin-top: 1em;
+  }
+}
+
+.inline-center {
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+  padding: 12px 6px;
+  border-radius: 6px;
+  & {
+    margin-top: 10px;
+  }
+  span {
+    display: inline-block;
+    width: 100%;
+  }
+  &:hover {
+    background-color: var(--bg-color);
+  }
+}

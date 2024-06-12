@@ -1,15 +1,31 @@
 :root {
   --primary-color: #575be3;
   --primary-color-two: #4044cf;
-  --color-one: #2a3566;
+  --color-one: #3d3b40;
   --color-light: #7787a3;
   --color-two: #4e53f6;
 
-  --bg-color: #f0f4fd;
+  --bg-color: #bfcfe7;
   --bg-color-two: #f4f5f8;
   --bg-primary-color: #e7e8ff;
 
   --shadow: 0 0 10px 0 rgba(222, 222, 222, 0.3);
   // 布局
   --padding: 0.6em;
+}
+:root {
+  --lf-primary: #258bf7;
+  --lf-primary-bg: #e4f0ff;
+  --lf-success: #2bc89f;
+  --lf-success-bg: #ebfff8;
+  --lf-info: #a5b1b9;
+  --lf-info-bg: #f1f5f8;
+  --lf-warning: #fa9c4f;
+  --lf-warning-bg: #fff2e7;
+  --lf-danger: #f36262;
+  --lf-danger-bg: #ffefef;
+
+  --lf-btn-bg: #fff;
+  --lf-btn-border-color: #dcdfe6;
+  --lf-btn-color: #606266;
 }
