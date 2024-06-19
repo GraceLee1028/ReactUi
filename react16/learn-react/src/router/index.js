@@ -14,7 +14,8 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: 'home',
+        // path: 'home',
+        index: true, //设置后，地址/直接访问/home的内容
         element: <Home />,
         errorElement: <Error />
       },

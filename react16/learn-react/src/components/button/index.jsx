@@ -1,6 +1,7 @@
-import { Component } from 'react'
-import './index.scss'
-import LfIcon from '../icon/index'
+import { Component } from 'react';
+import PropTypes from 'prop-types';
+import './index.scss';
+import LfIcon from '../icon/index';
 class LfButton extends Component {
   //   constructor(props) {
   //     super(props)
@@ -24,7 +25,17 @@ class LfButton extends Component {
         {this.props.icon && <LfIcon name={this.props.icon} />}
         {this.props.children && <span>{this.props.children}</span>}
       </button>
-    )
+    );
   }
 }
-export default LfButton
+//default prop's value
+LfButton.defaultProps = {
+  type: 'info'
+};
+//define prop's type
+LfButton.propTypes = {
+  icon: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired
+};
+export default LfButton;
