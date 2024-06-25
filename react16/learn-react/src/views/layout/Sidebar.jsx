@@ -1,33 +1,23 @@
 import React, { Component } from 'react'
-import { BookOutlined } from '@ant-design/icons'
 import { Menu } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import { getMenu, routes } from '@/router/index'
 // import {useLoaderData} from "react-router-dom"
 // const {contacts} =  useLoaderData();
+//把class类组件包装在一个函数组件上
+const withNavigate = WrappedComponent => {
+  return function WithNavigate(props) {
+    const navigate = useNavigate()
+    return <WrappedComponent {...props} navigate={navigate} />
+  }
+}
 class Sidebar extends Component {
-  state = {
-    menuItems: [
-      {
-        key: '001',
-        icon: <BookOutlined />,
-        label: '首页'
-      },
-      {
-        key: '002',
-        icon: <BookOutlined />,
-        label: '用户中心'
-      },
-      {
-        key: '003',
-        icon: <BookOutlined />,
-        label: '图标'
-      },
-      {
-        key: '004',
-        icon: <BookOutlined />,
-        label: '按钮'
-      }
-    ]
+  constructor(props) {
+    super(props)
+    this.state = {
+      menuItems: getMenu(routes)
+    }
+    console.log(this.state.menuItems)
   }
   render() {
     return (
@@ -43,9 +33,11 @@ class Sidebar extends Component {
   }
   onClick = e => {
     console.log(e)
-
-    return
+    let path = e.key
+    path = path === '/home' ? '/' : path
+    console.log(path, '=======路径')
+    this.props.navigate(path)
   }
 }
 
-export default Sidebar
+export default withNavigate(Sidebar)

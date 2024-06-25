@@ -51,3 +51,12 @@ body {
     background-color: var(--bg-color);
   }
 }
+.mini-scroll {
+  width: 200px;
+  height: 200px;
+  overflow-y: auto;
+  border: 1px dashed #ddd;
+  padding: 10px {
+    right: 0;
+  }
+}

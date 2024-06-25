@@ -22,7 +22,7 @@ class MatchTwo extends Component {
   }
   render() {
     return (
-      <>
+      <div className="lf-container white">
         <h2>比大小,最小1点，最大6点</h2>
         <h3>规则6点为最大，1点为最小,下注最少20元</h3>
         <h1>您当前的账户余额为：{this.state.form.rest}元</h1>
@@ -101,7 +101,7 @@ class MatchTwo extends Component {
             })}
           </tbody>
         </table>
-      </>
+      </div>
     )
   }
   fill = (e, key = 'initVal') => {

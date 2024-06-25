@@ -1,9 +1,18 @@
 .lf-icon {
-  color: inherit;
-  width: 14px;
-  height: 14px;
-  font-size: 14px;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
   line-height: 1;
   vertical-align: baseline;
   display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  &.lf-icon--right {
+    margin-left: 5px;
+  }
+  &.lf-icon--right {
+    margin-left: 5px;
+  }
 }

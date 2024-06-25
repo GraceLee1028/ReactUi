@@ -6,7 +6,7 @@
   background: var(--lf-btn-bg);
   border: 1px solid var(--lf-btn-border-color);
   color: var(--lf-btn-color);
-  -webkit-appearance: none;
+  appearance: none;
   text-align: center;
   box-sizing: border-box;
   outline: none;
@@ -14,16 +14,27 @@
   transition: 0.1s;
   font-weight: 500;
   user-select: none;
-  padding: 10px 20px;
+  padding: 0.72em 1em;
+  line-height: 1;
   font-size: 14px;
   border-radius: 4px;
+  .lf-icon {
+    font-size: inherit;
+  }
+  span {
+    display: inline-block;
+    vertical-align: baseline;
+  }
   &.is-round {
     border-radius: 20px;
-    padding: 10px 20px;
   }
   &.is-circle {
     border-radius: 50%;
     padding: 10px;
+  }
+  &--default {
+    --lf-btn-bg: #fff;
+    --lf-btn-border-color: var(--lf-btn-color);
   }
   &--primary {
     --lf-btn-bg: var(--lf-primary);
@@ -76,5 +87,17 @@
   // }
   .lf-icon + span {
     margin-left: 6px;
+  }
+  &.lf-btn--smal {
+    font-size: 12px;
+  }
+  &.lf-btn--medium {
+    font-size: 16px;
+  }
+  &.lf-btn--default {
+    font-size: 14px;
+  }
+  &.lf-btn--large {
+    font-size: 18px;
   }
 }
