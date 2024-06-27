@@ -1,17 +1,18 @@
-import { createBrowserRouter } from 'react-router-dom'
-import Login from '@/views/system/login/index.js'
-import LayoutMain from '@/views/layout/index.jsx'
-import Home from '@/views/system/home/index.jsx'
-import User from '@/views/system/user/index.jsx'
-import MatchTwo from '@/views/system/match/index.jsx'
-import Button from '@/views/system/button/index.jsx'
-import Lifecircle from '@/views/system/lifecircle/index.jsx'
-import NewLifecircle from '@/views/system/lifecircle/newIndex.jsx'
+import { createBrowserRouter } from 'react-router-dom';
+import Login from '@/views/system/login/index.js';
+import LayoutMain from '@/views/layout/index.jsx';
+import Home from '@/views/system/home/index.jsx';
+import User from '@/views/system/user/index.jsx';
+import MatchTwo from '@/views/system/match/index.jsx';
+import Button from '@/views/system/button/index.jsx';
+import Lifecircle from '@/views/system/lifecircle/index.jsx';
+import NewLifecircle from '@/views/system/lifecircle/newIndex.jsx';
+import ModuleCss from '@/views/system/moduleCss/index.jsx';
 
-import Icon from '@/views/system/icon/index.jsx'
-import Error from '@/views/layout/error'
+import Icon from '@/views/system/icon/index.jsx';
+import Error from '@/views/layout/error';
 
-import { BookOutlined } from '@ant-design/icons'
+import { BookOutlined } from '@ant-design/icons';
 
 export const routes = [
   {
@@ -55,8 +56,14 @@ export const routes = [
     name: '新生命周期',
     element: <NewLifecircle />,
     errorElement: <Error />
+  },
+  {
+    path: 'ModuleCss',
+    name: '样式的模块化',
+    element: <ModuleCss />,
+    errorElement: <Error />
   }
-]
+];
 const router = createBrowserRouter([
   {
     path: '/',
@@ -69,14 +76,14 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <Error />
   }
-])
+]);
 export function getMenu(routes) {
   return routes.map(route => {
     return {
       key: route.path ? route.path : '/home',
       icon: <BookOutlined />,
       label: route.name
-    }
-  })
+    };
+  });
 }
-export default router
+export default router;

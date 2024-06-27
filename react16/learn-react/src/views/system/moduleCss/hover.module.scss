@@ -1,0 +1,21 @@
+.title {
+  color: #999;
+  padding: 10px;
+  &:hover {
+    border: 1px dashed rgb(183, 224, 194);
+    color: #353535;
+  }
+  .highlight {
+    color: #fff;
+    background-color: rgb(24, 170, 121);
+    padding: 4px;
+    border-radius: 6px;
+    line-height: 1;
+    &.mr {
+      margin-right: 4px;
+    }
+  }
+}
+.mr {
+  margin-right: 6px;
+}

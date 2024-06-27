@@ -32,7 +32,7 @@ class PageBtn extends Component {
         子组件:{this.state.count}
         <div ref={this.elementRef} className="mini-scroll">
           {Array.from({ length: this.state.count }, (_, i) => {
-            return <p key={i}>数据：{i + 1}</p>
+            return <p key={i}>数据：{this.state.count - i}</p>
           })}
         </div>
       </div>
