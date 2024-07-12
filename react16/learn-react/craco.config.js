@@ -1,16 +1,16 @@
-const path = require("path")
-const isProd = process.env.NODE_ENV==="production";
+const path = require('path');
+const isProd = process.env.NODE_ENV === 'production';
 module.exports = {
   webpack: {
     // 配置路径别名
     alias: {
-      "@": path.join(__dirname, "src"),
+      '@': path.join(__dirname, 'src')
     },
     configure: webpackConfig => {
       // 生产环境配置
       if (isProd) {
         // 去除map文件
-        webpackConfig.devtool = false
+        webpackConfig.devtool = false;
         // 拆包
         webpackConfig.optimization = {
           splitChunks: {
@@ -41,14 +41,14 @@ module.exports = {
               }
             }
           }
-        }
+        };
         // 输出output
         webpackConfig.output = {
           ...webpackConfig.output,
           publicPath: './' // 打包资源引入路径--目前使用的是相对路径
-        }
+        };
       }
-      return webpackConfig
+      return webpackConfig;
     },
     devServer: {
       // 本地服务的端口号
@@ -56,25 +56,24 @@ module.exports = {
       // 本地服务的响应头设置
       headers: {
         // 允许跨域
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': '*'
       },
       //代理
-      proxy:{
-        "/proxy":{
-          target:"http://192.168.29.60:18081/manage",
-          chageOrigin:true,
-          path
+      proxy: {
+        '/proxy': {
+          target: 'http://192.168.29.60:18081/manage',
+          chageOrigin: true,
+          pathRewrite: {
+            '^/proxy': ''
+          }
         }
       }
     },
     babel: {
       plugins: [
         // 生产环境只留console.error、warn，去除console.log
-        [
-          'babel-plugin-transform-remove-console',
-          { exclude: isProd ? ['error', 'warn'] : ['error', 'warn', 'log'] }
-        ]
+        ['babel-plugin-transform-remove-console', { exclude: isProd ? ['error', 'warn'] : ['error', 'warn', 'log'] }]
       ]
     }
   }
-}
+};
